@@ -36,6 +36,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
+
+const dbUrl = process.env.ATLASDB_URL
 main()
   .then(() => {
     console.log("connect successfully");
@@ -45,7 +47,7 @@ main()
   });
 
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/uninotify");
+  await mongoose.connect(dbUrl);
 }
 
 // Session Middleware
