@@ -1,0 +1,219 @@
+<%- layout("/layouts/boilerplate") %>
+<style>
+  .marginTop {
+    margin-top: 2rem;
+  }
+</style>
+<body>
+  <form
+    action="/opportunity"
+    method="post"
+    class="row g-3 needs-validation col-12 col-lg-8 offset-lg-2 mt-3"
+    novalidate
+  >
+    <h3>Create A new Opportunity:</h3>
+    <div class="col-12">
+      <label for="validationCustom01" class="form-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="validationCustom01"
+        name="title"
+        placeholder="Enter a title"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="col-12">
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        class="form-control"
+        id="description"
+        name="description"
+      ></textarea>
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="col-6">
+      <label for="validationCustom01" class="form-label">Company name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="validationCustom01"
+        placeholder="Enter a company name"
+        name="company"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="col-6">
+      <label for="validationCustom01" class="form-label">Location</label>
+      <input
+        type="text"
+        class="form-control"
+        id="validationCustom01"
+        placeholder="Enter a location"
+        name="location"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="col-6">
+      <label for="validationCustom01" class="form-label">Link</label>
+      <input
+        type="text"
+        class="form-control"
+        id="validationCustom01"
+        name="link"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="col-6">
+      <label for="validationCustom01" class="form-label">Deadline</label>
+      <input
+        type="date"
+        class="form-control"
+        id="validationCustom01"
+        name="deadline"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+
+    <div class="col-12">
+      <label class="form-label">Types of Opportuntiy</label>
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        name="category"
+        id="category"
+      >
+        <option value="">Select an option</option>
+        <option value="Internship">Internship</option>
+        <option value="Hackathon">Hackathon</option>
+        <option value="Placement">Placement</option>
+      </select>
+    </div>
+    <!-- Internship -->
+    <div id="internshipFields" style="display: none">
+      <div class="row">
+        <div class="col-6">
+          <label for="validationCustom01" class="form-label">Stipend</label>
+          <input
+            type="number"
+            class="form-control"
+            id="validationCustom01"
+            name="stipend"
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+
+        <div class="col-6">
+          <label class="form-label">Work Mode</label>
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            name="workMode"
+          >
+            <option value="">Select an option</option>
+            <option value="online">Online</option>
+            <option value="offline">Offline</option>
+            <option value="hybrid">Hybrid</option>
+          </select>
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hackathon -->
+    <div id="hackathonFields" style="display: none">
+      <div class="row">
+        <div class="col-6">
+          <label for="validationCustom01" class="form-label">Prize</label>
+          <input
+            type="number"
+            class="form-control"
+            id="validationCustom01"
+            name="prize"
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+
+        <div class="col-6">
+          <label for="validationCustom01" class="form-label">Team Size</label>
+          <input
+            type="number"
+            class="form-control"
+            id="validationCustom01"
+            name="teamSize"
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Placement -->
+    <div id="placementFields" style="display: none">
+      <div class="row">
+        <div class="col-6">
+          <label for="validationCustom01" class="form-label">Salary</label>
+          <input
+            type="number"
+            class="form-control"
+            id="validationCustom01"
+            name="salary"
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+
+        <div class="col-6">
+          <label for="validationCustom01" class="form-label">Job Role</label>
+          <input
+            type="text"
+            class="form-control"
+            id="validationCustom01"
+            name="jobRole"
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+
+        <div class="col-6">
+          <label for="validationCustom01" class="form-label"
+            >CGPA Criteria</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="validationCustom01"
+            name="cgpaCriteria"
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-danger">Submit</button>
+  </form>
+  <script>
+    let category = document.getElementById("category");
+    let internshipFields = document.getElementById("internshipFields");
+    let hackathonFields = document.getElementById("hackathonFields");
+    let placementFields = document.getElementById("placementFields");
+
+    category.addEventListener("change", () => {
+      const value = category.value;
+
+      internshipFields.style.display = "none";
+      hackathonFields.style.display = "none";
+      placementFields.style.display = "none";
+
+      if (value === "Internship") {
+        internshipFields.style.display = "block";
+      } else if (value === "Hackathon") {
+        hackathonFields.style.display = "block";
+      } else if (value === "Placement") {
+        placementFields.style.display = "block";
+      }
+    });
+  </script>
+</body>

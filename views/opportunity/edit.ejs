@@ -1,0 +1,232 @@
+<%- layout("/layouts/boilerplate") %>
+<style>
+  .marginTop {
+    margin-top: 2rem;
+  }
+</style>
+<body>
+  <form
+    action="/opportunity/<%= opportunity._id %>?_method=PUT"
+    method="post"
+    class="row g-3 needs-validation col-12 col-lg-8 offset-lg-2 mt-3"
+    novalidate
+  >
+    <h3>Update Opportunity:</h3>
+    <div class="col-12">
+      <label for="validationCustom01" class="form-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="validationCustom01"
+        name="title"
+        value="<%=opportunity.title%>"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="col-12">
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        class="form-control"
+        id="description"
+        name="description"
+        
+      ><%=opportunity.description%></textarea>
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="col-6">
+      <label for="validationCustom01" class="form-label">Company name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="validationCustom01"
+        value="<%=opportunity.company%>"
+        name="company"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="col-6">
+      <label for="validationCustom01" class="form-label">Location</label>
+      <input
+        type="text"
+        class="form-control"
+        id="validationCustom01"
+        value="<%=opportunity.location%>"
+        name="location"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="col-6">
+      <label for="validationCustom01" class="form-label">Link</label>
+      <input
+        type="text"
+        class="form-control"
+        id="validationCustom01"
+        name="link"
+        value="<%=opportunity.link%>"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="col-6">
+      <label for="validationCustom01" class="form-label">Deadline</label>
+      <input
+        type="date"
+        class="form-control"
+        id="validationCustom01"
+        name="deadline"
+        value="<%=opportunity.deadline.toISOString().split('T')[0]%>"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+
+    <div class="col-12">
+      <label class="form-label">Types of Opportuntiy</label>
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        name="category"
+        id="category"
+      >
+        <option value="">Select an option</option>
+        
+            <option value="Internship" <%= opportunity.category == "Internship" ? "selected": ""%>>Internship</option>
+            <option value="Hackathon" <%= opportunity.category == "Hackathon" ? "selected": ""%>>Hackathon</option>
+            <option value="Placement" <%= opportunity.category == "Placement" ? "selected": ""%>>Placement</option>        
+      </select>
+    </div>
+    <!-- Internship -->
+    <div id="internshipFields" style="display: none">
+      <div class="row">
+        <div class="col-6">
+          <label for="validationCustom01" class="form-label">Stipend</label>
+          <input
+            type="number"
+            class="form-control"
+            id="validationCustom01"
+            name="stipend"
+            value="<%=opportunity.stipend%>"
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+
+        <div class="col-6">
+          <label class="form-label">Work Mode</label>
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            name="workMode"
+          >
+          <option value="online" <%= opportunity.workMode === "online" ? "selected" : "" %>>Online</option>
+          <option value="offline" <%= opportunity.workMode === "offline" ? "selected" : "" %>>Offline</option>
+          <option value="hybrid" <%= opportunity.workMode === "hybrid" ? "selected" : "" %>>Hybrid</option>
+            
+            
+            
+            
+          </select>
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hackathon -->
+    <div id="hackathonFields" style="display: none">
+      <div class="row">
+        <div class="col-6">
+          <label for="validationCustom01" class="form-label">Prize</label>
+          <input
+            type="number"
+            class="form-control"
+            id="validationCustom01"
+            name="prize"
+            value="<%=opportunity.prize%>"
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+
+        <div class="col-6">
+          <label for="validationCustom01" class="form-label">Team Size</label>
+          <input
+            type="number"
+            class="form-control"
+            id="validationCustom01"
+            name="teamSize"
+            value="<%=opportunity.teamSize%>"
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Placement -->
+    <div id="placementFields" style="display: none">
+      <div class="row">
+        <div class="col-6">
+          <label for="validationCustom01" class="form-label">Salary</label>
+          <input
+            type="number"
+            class="form-control"
+            id="validationCustom01"
+            name="salary"
+            value="<%=opportunity.salary%>"
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+
+        <div class="col-6">
+          <label for="validationCustom01" class="form-label">Job Role</label>
+          <input
+            type="text"
+            class="form-control"
+            id="validationCustom01"
+            name="jobRole"
+            value="<%=opportunity.jobRole%>"
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+
+        <div class="col-6">
+          <label for="validationCustom01" class="form-label"
+            >CGPA Criteria</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="validationCustom01"
+            name="cgpaCriteria"
+            value="<%=opportunity.cgpaCriteria%>"
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-danger">Submit</button>
+  </form>
+  <script>
+    let category = document.getElementById("category");
+    let internshipFields = document.getElementById("internshipFields");
+    let hackathonFields = document.getElementById("hackathonFields");
+    let placementFields = document.getElementById("placementFields");
+
+   
+      const value = category.value;
+
+      internshipFields.style.display = "none";
+      hackathonFields.style.display = "none";
+      placementFields.style.display = "none";
+
+      if (value === "Internship") {
+        internshipFields.style.display = "block";
+      } else if (value === "Hackathon") {
+        hackathonFields.style.display = "block";
+      } else if (value === "Placement") {
+        placementFields.style.display = "block";
+      }
+    
+  </script>
+</body>

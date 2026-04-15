@@ -1,0 +1,48 @@
+<%- layout("/layouts/boilerplate.ejs") %>
+
+<form
+  action="/signup"
+  method="post"
+  class="row g-3 needs-validation col-12 col-lg-6 offset-lg-3 mt-3"
+  novalidate
+>
+  <h3>Sign Up:</h3>
+  <div class="col-12">
+    <label for="validationCustom01" class="form-label">Email</label>
+    <input
+      type="text"
+      class="form-control"
+      id="validationCustom01"
+      name="email"
+      placeholder="Enter a Email"
+      required
+    />
+    <div class="valid-feedback">Looks good!</div>
+  </div>
+  <div class="col-12">
+    <label for="validationCustom01" class="form-label">Password</label>
+    <input
+      type="text"
+      class="form-control"
+      id="validationCustom01"
+      name="password"
+      placeholder="Enter a Password"
+      required
+    />
+    <div class="valid-feedback">Looks good!</div>
+  </div>
+  <div class="col-12">
+    <label class="form-label">Roles: </label>
+    <select
+      class="form-select"
+      aria-label="Default select example"
+      name="role"
+      id="category"
+    >
+      <option value="">Select an role</option>
+      <option value="teacher">Teacher</option>
+      <option value="student" selected>Student</option>
+    </select>
+  </div>
+  <button class="btn btn-danger">Sign Up</button>
+</form>

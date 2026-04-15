@@ -1,0 +1,67 @@
+<%-layout("layouts/boilerplate")%>
+  <style>
+    
+  </style>
+
+  <body>
+    <div class="col-12 col-lg-8 offset-lg-2 col-md-8 offset-md-2 mt-4">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%=opportunity.title%>
+          </h5>
+          <p class="card-text d-flex flex-column">
+            <span>
+              <%=opportunity.description%>
+            </span>
+            <span>Comapany Name: <b>
+                <%=opportunity.company%>
+              </b></span>
+            <span>Company Location: <b>
+                <%=opportunity.location%>
+              </b></span>
+            <% if(opportunity.category=='Internship' ){ %>
+              <span>Work Mode: <b>
+                  <%=opportunity.workMode%>
+                </b></span>
+              <span>Stipend: <b>
+                  <%=opportunity.stipend%>
+                </b></span>
+              <%}%>
+                <% if(opportunity.category=='Hackathon' ){ %>
+                  <span>Prize: <b>
+                      <%=opportunity.prize%>
+                    </b></span>
+                  <span>Team Size: <b>
+                      <%=opportunity.teamSize%>
+                    </b></span>
+                  <%}%>
+                    <% if(opportunity.category=='Placement' ){ %>
+                      <span>Salary: <b>
+                          <%=opportunity.salary%>
+                        </b></span>
+                      <span>Job Role: <b>
+                          <%=opportunity.jobRole%>
+                        </b></span>
+                      <span>CGPA Criteria: <b>
+                          <%=opportunity.cgpaCriteria%> cgpa
+                        </b></span>
+                      <%}%>
+                        <span>Deadline: <b>
+                            <%=opportunity.deadline.toString().split(" ").slice(1,4).join(" ")%>
+                          </b></span>
+            </p>
+          <div>
+             <a href="<%=opportunity.link%>" class="btn btn-primary apply mb-2">Apply</a>
+             <% if(currUser && opportunity.owner && currUser._id.toString() === opportunity.owner._id.toString()) {%>
+                <form action="/opportunity/<%= opportunity._id %>">
+                  <button class="btn btn-secondary">Update</button>
+                </form>
+              <% } %>
+            
+          </div>
+         
+        </div>
+      </div>
+    </div>
+  </body>

@@ -1,0 +1,51 @@
+<%- layout("/layouts/boilerplate") %>
+<style>
+  .buttons{
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+</style>
+  <body>
+    <div class="container mt-4">
+      <div class="d-flex justify-content-end mb-4">
+        <a href="/opportunity/new" class="btn btn-danger">
+          <i class="fa-solid fa-plus me-2"></i>
+          Add new <%= JSON.stringify(q) %>
+        </a>
+      </div>
+
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <% categories.forEach(opportunity=> { %>
+          <div class="col">
+            <div class="card h-100 text-center shadow-sm">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">
+                  <%= opportunity.title %>
+                </h5>
+                <p class="card-text">
+                  <%= opportunity.description %>
+                </p>
+                <div class="mt-auto  buttons">
+                  <a href="/opportunity/category/<%= opportunity._id %>" class="btn btn-primary">
+                    Discover More
+                  </a>
+                  <% if(currUser && opportunity.owner && currUser._id.toString() === opportunity.owner._id.toString()) { %>
+                    <form action="/opportunity/<%= opportunity._id %>?_method=DELETE" method="post">
+                      <button class="btn btn-danger">Delete</button>
+                    </form>
+                  <% } %>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+      </div>
+
+
+
+
+    </div>
+  </body>
