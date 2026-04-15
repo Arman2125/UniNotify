@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV != "production"){
+if (process.env.NODE_ENV != "production") {
   require("dotenv").config();
 }
 
@@ -21,6 +21,7 @@ const wrapasync = require("./util/wrapasync");
 const { validatingSchema, isTeacherOrAdmin } = require("./middleware");
 const { wrap } = require("module");
 const session = require("express-session");
+const MongoStore = require("connect-mongo").MongoStore;
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -37,7 +38,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
 
-const dbUrl = process.env.ATLASDB_URL
+const dbUrl = process.env.ATLASDB_URL;
 main()
   .then(() => {
     console.log("connect successfully");
@@ -51,6 +52,19 @@ async function main() {
 }
 
 // Session Middleware
+
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  crypto: {
+    secret: "mysupersecret",
+  },
+  touchAfter: 24 * 3600,
+});
+
+store.on("error", (err) => {
+  console.log("ERROR in MONGO SESSION STORE", err);
+});
+
 app.use(
   session({
     secret: "mysupersecret",
@@ -61,6 +75,7 @@ app.use(
       maxAge: 7 * 24 * 60 * 60 * 1000,
       httpOnly: true,
     },
+    store,
   }),
 );
 
@@ -97,8 +112,7 @@ app.get("/", (req, res) => {
 // Routes
 
 app.use("/opportunity", opportunityRoute);
-app.use("/", userRoute)
-
+app.use("/", userRoute);
 
 //Error Handling
 
